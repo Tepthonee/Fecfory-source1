@@ -932,71 +932,56 @@ data = {
 {text = '≠ مبرمج السورس',type = 'text'},{text = '≠ سورس',type = 'text'},
 },
 {
-{text = '≠ الغاء',type = 'text'},{text = '≠ طريقة إنشاء بوت',type = 'text'},
+{text = '≠ الغاء',type = 'text'},
 },
 }
 }
-send(msg.chat_id,msg.id,"≠ اهلا بك في صانع بوتات سورس رانكس \n≠ قناة السورس @crvso","html",true, false, false, true, reply_markup)
+send(msg.chat_id,msg.id,"≠ اهلا بك في صانع بوتات سورس ريلاكس \n≠ قناة السورس @crsvo","html",true, false, false, true, reply_markup)
 return false 
 end
-if text == '≠ طريقة إنشاء بوت' then 
-return bot.sendText(msg.chat_id,msg.id,[[*
-≠ : اهلا بك عزيزي في قسم الشرح
-≠ : لأنشاء بوت جديد اتبع مايلي :
-≠ : 1 - اذهب الى بوت فاذر : ‹ @BotFather ›
-≠ : 2 - ارسل الامر  ‹ newbot/ ›
-≠ : 3 - ارسل اسم للبوت كمثال : ‹ Ranxs TEaM ›
-≠ : 4 - ارسل معرف للبوت بشرط بالنهايه ‹ bot ›
-≠ : كمثال لمعرف البوت : ‹ @TTUUPu_BOT ›
-≠ : بعدها يظهر لك رساله تحتوي على التوكن
-≠ : كمثال للتوكن : ‹ 5728727372:AAEQ ›
-≠ : 5. قم بأرسال التوكن لصنع بوتك
-⌁ : تابع قناتنا : ‹ @crvso ›
-*]],"md",true)
-end
-if text == '≠ مبرمج السورس' then
-local IdUser_Info = LuaTele.searchPublicChat("PPF22")
-if IdUser_Info.id then
-local UserInfo = LuaTele.getUser(IdUser_Info.id)
-local InfoUser = LuaTele.getUserFullInfo(IdUser_Info.id)
+if text == '. السورس' or text == '≠ مبرمج السورس' or text == 'مطور السورس ≠' then  
+local UserId_Info = LuaTele.searchPublicChat("HH_VE")
+if UserId_Info.id then
+local UserInfo = LuaTele.getUser(UserId_Info.id)
+local InfoUser = LuaTele.getUserFullInfo(UserId_Info.id)
 if InfoUser.bio then
 Bio = InfoUser.bio
 else
-Bio = ""
+Bio = ''
 end
-if UserInfo.username then
-UserInfousername = "[@"..UserInfo.username.."]"
+if UserInfo.first_name then
+username = UserInfo.first_name
 else
-UserInfousername = "لا يوجد"
+username = ''
 end
-local photo = LuaTele.getUserProfilePhotos(IdUser_Info.id)
-if photo and photo.total_count and photo.total_count > 0 then
-local TestText = "* ⌁ : 𝙳𝙴𝚅 𝙽𝙰𝙼𝙴 : * ["..UserInfo.first_name.."](tg://user?id="..UserInfo.id..") .\n* ⌁ : 𝙳𝙴𝚅 𝚄𝚂𝙴𝚁𝙽𝙰𝙼𝙴* : "..UserInfousername.."\n* ⌁ : 𝙳𝙴𝚅 𝙸𝙳 : *"..UserInfo.id.." .\n* ⌁ : 𝙳𝙴𝚅 𝙱𝙸𝙾 : * ["..Bio.."] ."
+local photo = LuaTele.getUserProfilePhotos(UserId_Info.id)
+if photo.total_count > 0 then
+local TestText = "*≠ مبرمج سورس رانكس ≠\n≠ ɴᴀᴍᴇ ->* ["..UserInfo.first_name.."](tg://user?id="..UserId_Info.id..")\n*≠ ʙɪᴏ -> "..Bio.." *"
 keyboardd = {} 
 keyboardd.inline_keyboard = {
 {
-{text = "‹ سورس رانكس ›", url="https://t.me/crvso"},
+{text = username, url = "https://t.me/HH_VE"}
 },
 }
 local msg_id = msg.id/2097152/0.5 
-return https.request("https://api.telegram.org/bot"..Token.."/sendPhoto?chat_id="..msg.chat_id.."&caption="..URL.escape(TestText).."&photo="..photo.photos[1].sizes[#photo.photos[1].sizes].photo.remote.id.."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboardd))
+return https.request("https://api.telegram.org/bot"..Token..'/sendPhoto?chat_id='..msg.chat_id..'&caption='..URL.escape(TestText)..'&photo='..photo.photos[1].sizes[#photo.photos[1].sizes].photo.remote.id..'&reply_to_message_id='..msg_id..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboardd))
 else
-local TestText = "- معلومات مطور السورس : \n\n* ⌁ : name:* ["..UserInfo.first_name.."](tg://user?id="..UserInfo.id..")\n\n* ⌁ : user :* "..UserInfousername.."\n\n* ⌁ : Bio:* ["..Bio.."]"
+local TestText = "- معلومات مبرمج السورس : \\nn: name Dev . ["..UserInfo.first_name.."](tg://user?id="..UserId_Info.id..")\n\n ["..Bio.."]"
 keyboardd = {} 
 keyboardd.inline_keyboard = {
 {
-{text = "‹ سورس رانكس ›", url="https://t.me/crvso"},
+{text = username, url = "https://t.me/HH_VE"}
 },
 }
 local msg_id = msg.id/2097152/0.5 
-return https.request("https://api.telegram.org/bot"..Token.."/sendMessage?chat_id=" .. msg.chat_id .. "&text=" .. URL.escape(TestText).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboardd))
+return https.request("https://api.telegram.org/bot"..Token..'/sendMessage?chat_id=' .. msg.chat_id .. '&text=' .. URL.escape(TestText).."&reply_to_message_id="..msg_id..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboardd))
 end
 end
 end
 if text == '≠ سورس' or text == 'يا سورس' or text == 'السورس' or text == 'source' then
 photo = "https://t.me/Ranksahhah/13"
 local T =[[
-☆︙[𝑊𝐸𝐿𝐶𝑂𝑀𝐸 𝑇𝑂 𝑆𝑂𝑈𝑅𝐶𝐸 𝑅𝐴𝑁𝐾𝑆  ](t.me/crvso )
+☆︙[𝑊𝐸𝐿𝐶𝑂𝑀𝐸 𝑇𝑂 𝑆𝑂𝑈𝑅𝐶𝐸 𝑅𝐴𝑁𝐾𝑆  ](t.me/crsvo )
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
@@ -1007,10 +992,10 @@ keyboard.inline_keyboard = {
 {text = '• مطور السورس •', url = 't.me/HH_VE'},
 },
 {
-{text = '• قناة التحديثات •', url = 't.me/crvso '},
+{text = '• قناة التحديثات •', url = 't.me/crsvo '},
 },
 {  
-{text = '• 𝑆𝑂𝑈𝑅𝐶𝐸 𝑅𝐴𝑁𝐾𝑆 •', url = 't.me/crvso '},
+{text = '• 𝑆𝑂𝑈𝑅𝐶𝐸 𝑅𝐴𝑁𝐾𝑆 •', url = 't.me/crsvo '},
 },
 }
 local msgg = msg.id/2097152/0.5
@@ -1083,6 +1068,8 @@ else
 send(msg.chat_id,msg.id, "\n ≠ عفوا لم تصنع اي بوت من قبل","md",true)  
 end
 end
+
+
 end --non Sudo_Id
 end--msg.sender_id
 end--Run
